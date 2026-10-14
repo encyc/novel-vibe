@@ -1,5 +1,17 @@
 # Novel Vibe（灵器 AI）
 
+## 为什么做 Novel Vibe
+
+小时候脑子里装着很多没写完的世界——设定想了好些年，角色在心里活了很久，但真正落成文字的没有几个。不是没有想法，是把一个世界写出来这件事，对一个人来说太重了。
+
+Novel Vibe 是为了把这份重量降下来做的：**借 AI 之力，让一直停留在脑子里的天马行空有机会真正落地**。
+
+所以它从第一天起就不是一台自动写作机器。想要日产十万字，市面上有更合适的工具；这里要的是**你主导、AI 辅助**——你来定世界观、定角色、定这一章讲什么，AI 负责把这些决定变成稿子、把你埋下却忘掉的伏笔捡回来、在设定自相矛盾时提醒你。
+
+这个立场写在架构里，不是写在口号里：所有文档走 `draft → confirmed → locked` 状态机，只有你能确认变更；子 Agent 无权删除任何东西，只能**提出**删除申请，交由你通过总编裁决。机器提议，人拍板。
+
+## Novel Vibe 是什么
+
 **多 Agent 的网文创作系统：本地优先，云可选。**
 
 你只和**总编（Chief Editor）**对话，由它统筹 6 个子 Agent 协作产出作品；所有创作内容都是**带 YAML frontmatter 的 Markdown 文件**（世界观、角色、关系、大纲、章节卡、导演稿、正文、伏笔、故事摘要、角色状态），Markdown 是唯一事实来源，数据库里的只是可重建的索引。
@@ -13,14 +25,9 @@
 | `writer` | 正文 |
 | `script_supervisor` | 连续性与场记 |
 
-**先看这六条：**
-
-- **许可**：Apache License 2.0，见 [`LICENSE`](LICENSE) 与 [`NOTICE`](NOTICE)。允许商业使用、修改、再分发，**也允许第三方把本软件作为托管服务提供**。
-- **品牌不在授权范围内**：名称（"Novel Vibe" / "灵器 AI"）、域名（`lingqiai.art`）与 logo 是项目方标识，Apache-2.0 不授予其使用权；fork 需要换名字与标识，不得暗示官方背书。详见 [`NOTICE`](NOTICE) 的商标段。
-- **本地优先**：整套系统可以在自己的机器上运行 —— 不需要注册账号，也不经过作者的模型服务。代价是 **Docker + 自备模型 API Key**（见 [怎么跑](#怎么跑)）。
+- **本地优先**：整套系统可以在自己的机器上运行 —— 不需要注册账号，也不经过作者的模型服务。代价是 **Docker + 自备模型 API Key**（见[怎么跑](#怎么跑)）。
 - **云可选**：作者运营的托管实例 <https://lingqiai.art> 免部署，模型调用由平台代付（消耗平台积分）。
 - **日常启动是一条命令**：`./scripts/local-start.sh`（首次准备见下）。
-- **公开 / 私有边界**：公开仓包含复现、构建、运行、测试本产品所需的全部内容（六个 `packages/` 应用、应用 schema 迁移、ADR、CI、公开仓泄漏自检）；生产环境标识与凭据、部署与发版运维、内部设计与计划材料不在公开仓，托管运维在私有仓（见 [`AGENTS.md`](AGENTS.md) 的 Hosted Operations 一节）。
 
 > 架构、工具、会话持久化、技能系统与端口的权威说明在 [`AGENTS.md`](AGENTS.md)。本 README 不复述架构，避免与它二次漂移。
 
@@ -105,7 +112,23 @@ npm run check:hygiene -- --public-only --strict   # 公开仓泄漏自检（同�
 
 CI 的顺序是先 typecheck、后 test，两者都必须通过（typecheck job 里还会跑公开仓泄漏自检）。`check:desktop` 需要 Rust 工具链（`cargo fmt` / `clippy` / `test`）；CI 使用 Node 22。
 
-## 架构与文档索引
+## 为什么开源
+
+lingqiai.art 是作者自己搭起来运营的托管实例，收入来自托管服务的便利——注册即用、免运维、模型调用由平台代付（消耗积分）。而 BYOK 模式下，模型请求直接发往用户自己的 provider key，平台不赚差价：**本地这条路径本来就不产生利润**。
+
+既然这条路不产生利润，闭源它守住的就是零。不如直接开源，让大家真正把本地部署跑起来，借社区的力量把项目往前推——用的人越多，项目越有生命力，愿意要"免部署"体验的人成为托管服务用户的池子也越大。
+
+## 开源范围与参与
+
+**范围**：公开仓包含复现、构建、运行、测试本产品所需的全部内容——六个 `packages/` 应用、应用 schema 迁移、ADR、CI、公开仓泄漏自检。不在公开仓的：生产环境标识与凭据、部署与发版运维、内部设计与计划材料；托管运维在私有仓，公开仓不依赖它（[`AGENTS.md`](AGENTS.md) 的「Hosted Operations」一节）。
+
+**许可**：本项目采用 **Apache License 2.0**，见 [`LICENSE`](LICENSE) 与 [`NOTICE`](NOTICE)。它允许商业使用、修改、再分发，**也允许第三方把本软件作为托管服务提供**；同时要求保留版权声明与 `NOTICE`。`lingqiai.art` 是作者运营的托管实例，只是便利，不是许可条件 —— 许可证授予你的权利与该服务无关。
+
+**品牌不在许可证范围内。** Apache-2.0 第 6 条明确不授予商标或品牌使用权：「Novel Vibe」「灵器 AI / 灵器」、`lingqiai.art` 域名与项目 logo 均属项目方标识。fork 或自托管时请使用不同的名称与标识，不要暗示官方背书；以事实方式说明"这是 Novel Vibe 的 fork"没有问题。完整声明见 [`NOTICE`](NOTICE)。
+
+**贡献**：见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。提交使用 **DCO**（`git commit -s`），不需要签 CLA；贡献以 Apache-2.0 授权（inbound = outbound）。
+
+## 如何理解这个项目
 
 不要从 README 学习架构，去读这些文件：
 
@@ -116,7 +139,9 @@ CI 的顺序是先 typecheck、后 test，两者都必须通过（typecheck job 
 - [`docs/self-hosting.md`](docs/self-hosting.md) —— 自托管走查：公开 InsForge fork、端口、Linux 手动步骤、验证命令
 - [`docs/community-guides/`](docs/community-guides/) —— 面向创作者的平台使用指南
 
-## 桌面端
+理解这个项目最省力的路径，是记住开头那句话——**你主导、AI 辅助**——然后看它落在哪些代码里：删除审批协议（子 Agent 只能申请、总编裁决）与文档状态机在 [`AGENTS.md`](AGENTS.md)；创作核心与 SaaS 计费的边界由 `scripts/check-architecture-boundary.mjs` 在 CI 里强制。
+
+### 桌面端
 
 [`packages/novel-desktop`](packages/novel-desktop) 是 Tauri 2 的"连接式外壳"：它加载**远程**的 `app.lingqiai.art`，本身不含 Agent / 会话 / 计费 / 文档等业务逻辑。**这是设计决策，不是未完成的功能**：
 
@@ -127,16 +152,10 @@ CI 的顺序是先 typecheck、后 test，两者都必须通过（typecheck job 
 
 想了解它到底做了什么，直接读源码：[`packages/novel-desktop/src-tauri/`](packages/novel-desktop/src-tauri)（`policy.rs` 管导航、`main.rs` 建窗口与注入 CSP、`bridge.rs` 是 `window.novelDesktop` 契约、`recovery.rs` 是加载超时看门狗、`offline/` 是断网恢复页）。设计记录属内部材料，不在公开仓。
 
-## 许可与品牌
-
-本项目采用 **Apache License 2.0**，见 [`LICENSE`](LICENSE) 与 [`NOTICE`](NOTICE)。它允许商业使用、修改、再分发，**也允许第三方把本软件作为托管服务提供**；同时要求保留版权声明与 `NOTICE`。`lingqiai.art` 是作者运营的托管实例，只是便利，不是许可条件 —— 许可证授予你的权利与该服务无关。
-
-**品牌不在许可证范围内。** Apache-2.0 第 6 条明确不授予商标或品牌使用权：「Novel Vibe」「灵器 AI / 灵器」、`lingqiai.art` 域名与项目 logo 均属项目方标识。fork 或自托管时请使用不同的名称与标识，不要暗示官方背书；以事实方式说明"这是 Novel Vibe 的 fork"没有问题。完整声明见 [`NOTICE`](NOTICE)。
-
-## 贡献
-
-见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。提交使用 **DCO**（`git commit -s`），不需要签 CLA；贡献以 Apache-2.0 授权（inbound = outbound）。
-
 ## English
 
-Novel Vibe is a multi-agent web-novel writing system: a Chief Editor agent coordinates six sub-agents (worldbuilding, characters, outlining, chapter direction, prose, continuity), and every artifact is stored as Markdown with YAML frontmatter, with the database acting only as a rebuildable index. It is local-first and cloud-optional: self-host it on your own machine (no account, no author-operated model service; you bring your own model API key and run Docker), or use the author-hosted instance at [lingqiai.art](https://lingqiai.art). The usual start is a single command, `./scripts/local-start.sh`, after a one-time setup: `make setup` clones the public InsForge fork (Apache-2.0, override with `INSFORGE_REPO_URL`) and creates the env files, so self-hosting from public sources is now complete — see [`docs/self-hosting.md`](docs/self-hosting.md) for the walkthrough and the manual Linux steps. What is still missing is coverage: the one-command local path is not exercised by CI. The public repository contains everything needed to build, run and test the product; production identifiers and credentials, deployment and release operations, and internal design material are not published, and hosted operations live in a private repository. The project is licensed under Apache-2.0, which permits commercial use and third-party hosting; names, domains and logos are brand identifiers and are **not** licensed, so forks need their own name and branding — see [`NOTICE`](NOTICE). Contributions are accepted under the DCO — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Novel Vibe exists to lower the cost of writing down the worlds you already carry in your head — with **you in charge and AI assisting**, not a fully-automated text mill. It is a multi-agent web-novel writing system: a Chief Editor agent coordinates six sub-agents (worldbuilding, characters, outlining, chapter direction, prose, continuity), and every artifact is stored as Markdown with YAML frontmatter, with the database acting only as a rebuildable index. That stance is enforced by the architecture, not just stated: documents move through a `draft → confirmed → locked` lifecycle that only you can confirm, and sub-agents may only *request* deletions, never execute them.
+
+It is local-first and cloud-optional: self-host it on your own machine (no account, no author-operated model service; you bring your own model API key and run Docker), or use the author-hosted instance at [lingqiai.art](https://lingqiai.art). The usual start is a single command, `./scripts/local-start.sh`, after a one-time setup: `make setup` clones the public InsForge fork (Apache-2.0, override with `INSFORGE_REPO_URL`) and creates the env files — see [`docs/self-hosting.md`](docs/self-hosting.md) for the walkthrough and the manual Linux steps. What is still missing is coverage: the one-command local path is not exercised by CI.
+
+It is open source because the local path earns nothing: hosted revenue comes from the convenience of the managed instance, while BYOK users' requests go straight to their own provider keys. Since closing the source would protect zero revenue, opening it costs nothing — and a working local deployment for everyone is worth more than a locked door. The public repository contains everything needed to build, run and test the product; production identifiers and credentials, deployment and release operations, and internal design material are not published, and hosted operations live in a private repository. The project is licensed under Apache-2.0, which permits commercial use and third-party hosting; names, domains and logos are brand identifiers and are **not** licensed, so forks need their own name and branding — see [`NOTICE`](NOTICE). Contributions are accepted under the DCO — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
