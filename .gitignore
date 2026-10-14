@@ -1,0 +1,57 @@
+# === Dependency projects (managed separately, not in this repo) ===
+InsForge/
+Memori/
+pi/
+
+# External writing-craft reference snapshot (not in this repo)
+Chinese-WebNovel-Skill/
+
+# === Dependencies ===
+node_modules/
+
+# === Build output ===
+dist/
+*.tsbuildinfo
+
+# === Environment (contains API keys) ===
+packages/novel-agents/.env
+.env
+.env.prod
+
+# === IDE / tooling ===
+.vscode/
+.idea/
+.codegraph/
+*.swp
+*.swo
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+
+# === Test output ===
+coverage/
+test-results.xml
+
+# === Temp ===
+/tmp/
+.worktrees/
+*.tar.gz
+
+# === SSL private keys (deploy separately) ===
+nginx/ssl/*.key
+
+#
+TODO.md
+
+# media
+media/
+
+# Separate landing-page repository clone
+lingqi-web/
+
+# ZCode session artifacts
+.zcode/

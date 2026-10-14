@@ -1,0 +1,283 @@
+:root {
+  --app-height: 100vh;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --mobile-workbench-header-height: 56px;
+  --color-canvas: hsl(188 18% 96%);
+  --color-surface: hsl(0 0% 100%);
+  --color-paper: hsl(42 35% 96%);
+  --color-paper-deep: hsl(42 24% 91%);
+  --color-ink: hsl(162 12% 18%);
+  --color-sage-900: hsl(162 28% 22%);
+  --color-sage-700: hsl(165 24% 31%);
+  --color-sage-600: hsl(168 22% 45%);
+  --color-sage-300: hsl(165 25% 78%);
+  --color-sage-100: hsl(168 20% 92%);
+  --color-mist-100: hsl(188 20% 92%);
+  --color-rose-100: hsl(345 30% 90%);
+  --color-rose-300: hsl(342 25% 82%);
+  --color-border: hsl(192 15% 85%);
+  --color-muted: hsl(165 10% 40%);
+  --color-danger: hsl(0 40% 45%);
+  --color-seal: hsl(8 28% 42%);
+  --font-ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-writing: Lora, "Noto Serif SC", "Songti SC", Georgia, serif;
+  --font-display: "Cormorant Garamond", "Noto Serif SC", "Songti SC", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --radius-control: 7px;
+  --shadow-paper: 0 20px 55px hsl(162 12% 18% / 0.08);
+  --motion-instant: 140ms;
+  --motion-control: 200ms;
+  --motion-panel: 280ms;
+  --motion-page-duration: 280ms;
+  --ease-quiet: cubic-bezier(.22, .72, .24, 1);
+  --ease-settle: cubic-bezier(.2, .65, .25, 1);
+  --motion-page: var(--motion-page-duration) var(--ease-quiet);
+  --layer-modal-backdrop: 80;
+  --layer-modal: 81;
+  --layer-popover: 90;
+  --layer-tooltip: 100;
+  --sidebar-width: 248px;
+  --assistant-width: 340px;
+  --assistant-collapsed-width: 48px;
+  /* Micro-label floor: eyebrows and metadata never drop below 10px at the
+     default scale — 8-9px captions failed readability on laptop screens. */
+  --text-7: 10px;
+  --text-8: 10px;
+  --text-9: 10px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-25: 25px;
+  --text-caption: var(--text-10);
+  --text-metadata: var(--text-11);
+  --text-interface: var(--text-13);
+  --text-reading: var(--text-16);
+  --text-subheading: var(--text-20);
+  --text-title: var(--text-25);
+  --control-height: 38px;
+  --icon-button-size: 34px;
+  --sidebar-brand-height: 54px;
+  --nav-item-height: 35px;
+  --document-column-width: clamp(180px, 19vw, 220px);
+  --document-row-padding: 11px 12px;
+  --document-row-min-height: 48px;
+  --workspace-colophon-padding: 10px 24px;
+  --source-editor-padding: 16px clamp(12px, 2vw, 24px);
+  --editor-font-size: var(--text-14);
+  --editor-line-height: 1.75;
+  --editor-content-padding: 16px 20px 48px;
+  /* dsh metric layer (alias) — component styles may reference aliases only,
+     never static colors or bare values directly.
+     Metrics transcribed from deepseek-harness packages/client:
+     ui-theme base.css (motion), ui-workspace Rows.module.css (tree rows
+     32/34 · r8 · indent 22), ui-tool ToolRow.module.css (tool row 14/24 ·
+     pill 11px), ui-conversation InputBar.module.css (composer r22 · 16px),
+     ui-theme design-platform.css (alpha borders, label tiers, interactive
+     fills, shadows), scrollbar.css (8px thin scrollbars). */
+  --alias-bg-base: var(--color-canvas);
+  --alias-bg-surface: var(--color-surface);
+  --alias-bg-paper: var(--color-paper);
+  --alias-bg-layer-1: var(--color-surface);
+  --alias-bg-layer-2: var(--color-surface);
+  --alias-bg-layer-3: var(--color-canvas);
+  --alias-border-l1: var(--color-border);
+  /* dsh alpha borders (design-platform.css:170-176) tinted with our ink. */
+  --alias-border-l2: hsl(160 12% 18% / .1);
+  --alias-border-l3: hsl(160 12% 18% / .12);
+  --alias-border-l4: hsl(160 12% 18% / .16);
+  --alias-label-primary: var(--color-ink);
+  --alias-label-muted: var(--color-muted);
+  /* dsh label tiers (design-platform.css:201-209) → ink at descending weight. */
+  --alias-label-secondary: hsl(160 10% 30%);
+  --alias-label-tertiary: hsl(160 8% 42%);
+  --alias-label-caption: hsl(160 6% 58%);
+  /* dsh interactive fills (design-platform.css:196-200). */
+  --alias-interactive-hover: hsl(160 18% 24% / .06);
+  --alias-interactive-active: hsl(160 18% 24% / .1);
+  --alias-interactive-hover-solid: hsl(160 16% 92%);
+  --alias-accent: var(--color-sage-700);
+  --alias-accent-soft: var(--color-sage-100);
+  /* Deep solid for primary fills (dirty-state save, CTAs): light enough in
+     light theme, and its dark remap stays deep instead of pastel mint so
+     light text keeps a readable contrast ratio. */
+  --alias-solid-bg: var(--color-sage-900);
+  --alias-solid-fg: hsl(42 30% 97%);
+  --alias-state-error: var(--color-danger);
+  /* dsh shadows (gradient-shadow-text.css:4-11). */
+  --alias-shadow-lv2: 0 4px 12px 0 rgba(0, 0, 0, .02), 0 2px 8px 0 rgba(0, 0, 0, .04);
+  --alias-shadow-lv3: 0 0 1px 0 rgba(0, 0, 0, .2), 0 0 4px 0 rgba(0, 0, 0, .02), 0 12px 32px 0 rgba(0, 0, 0, .08);
+  --alias-scrollbar-thumb: hsl(160 6% 78%);
+  --alias-scrollbar-thumb-hover: hsl(160 6% 66%);
+  --alias-radius-control: 8px;
+  --alias-radius-composer: 22px;
+  --alias-radius-pill: 999px;
+  --alias-duration-fast: 100ms;
+  --alias-duration-slow: 300ms;
+  --alias-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --alias-row-height-session: 32px;
+  --alias-row-height-group: 34px;
+  --alias-row-indent: 22px;
+  --alias-font-row: 14px;
+  --alias-line-row: 20px;
+  --alias-font-tool: 14px;
+  --alias-line-tool: 24px;
+  /* 8px thin scrollbars (dsh scrollbar.css:66-90). */
+  scrollbar-width: thin;
+  scrollbar-color: var(--alias-scrollbar-thumb) transparent;
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  font-family: var(--font-ui);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { border-radius: 4px; background: var(--alias-scrollbar-thumb); }
+::-webkit-scrollbar-thumb:hover { background: var(--alias-scrollbar-thumb-hover); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+:root[data-display-scale="compact"] {
+  --sidebar-width: 232px;
+  --assistant-width: 316px;
+  --assistant-collapsed-width: 42px;
+  --text-7: 9px;
+  --text-8: 9px;
+  --text-9: 9px;
+  --text-10: 9px;
+  --text-11: 10px;
+  --text-12: 11px;
+  --text-13: 12px;
+  --text-14: 13px;
+  --text-15: 13px;
+  --text-16: 14px;
+  --text-17: 15px;
+  --text-18: 16px;
+  --text-20: 18px;
+  --text-21: 19px;
+  --text-22: 20px;
+  --text-25: 22px;
+  --control-height: 34px;
+  --icon-button-size: 30px;
+  --sidebar-brand-height: 48px;
+  --nav-item-height: 31px;
+  --document-column-width: clamp(168px, 17vw, 204px);
+  --document-row-padding: 8px 10px;
+  --document-row-min-height: 40px;
+  --workspace-colophon-padding: 7px 18px;
+  --source-editor-padding: 14px clamp(10px, 2vw, 26px);
+  --editor-line-height: 1.75;
+  --editor-content-padding: 22px clamp(22px, 4vw, 54px) 48px;
+}
+
+:root[data-display-scale="extra-compact"] {
+  --sidebar-width: 218px;
+  --assistant-width: 292px;
+  --assistant-collapsed-width: 38px;
+  --text-7: 9px;
+  --text-8: 9px;
+  --text-9: 9px;
+  --text-10: 9px;
+  --text-11: 10px;
+  --text-12: 11px;
+  --text-13: 11px;
+  --text-14: 12px;
+  --text-15: 12px;
+  --text-16: 13px;
+  --text-17: 14px;
+  --text-18: 15px;
+  --text-20: 17px;
+  --text-21: 18px;
+  --text-22: 19px;
+  --text-25: 21px;
+  --control-height: 32px;
+  --icon-button-size: 30px;
+  --sidebar-brand-height: 44px;
+  --nav-item-height: 28px;
+  --document-column-width: clamp(152px, 16vw, 188px);
+  --document-row-padding: 6px 9px;
+  --document-row-min-height: 36px;
+  --workspace-colophon-padding: 5px 14px;
+  --source-editor-padding: 10px clamp(8px, 1.6vw, 20px);
+  --editor-line-height: 1.68;
+  --editor-content-padding: 18px clamp(18px, 3.4vw, 44px) 40px;
+}
+
+:root[data-display-scale="comfortable"] {
+  --sidebar-width: 264px;
+  --assistant-width: 370px;
+  --assistant-collapsed-width: 52px;
+  --text-7: 10px;
+  --text-8: 10px;
+  --text-9: 11px;
+  --text-10: 11px;
+  --text-11: 12px;
+  --text-12: 13px;
+  --text-13: 14px;
+  --text-14: 15px;
+  --text-15: 16px;
+  --text-16: 17px;
+  --text-17: 18px;
+  --text-18: 19px;
+  --text-20: 22px;
+  --text-21: 23px;
+  --text-22: 24px;
+  --text-25: 27px;
+  --control-height: 40px;
+  --icon-button-size: 36px;
+  --sidebar-brand-height: 58px;
+  --nav-item-height: 38px;
+  --document-column-width: clamp(200px, 20vw, 248px);
+  --document-row-padding: 12px 13px;
+  --document-row-min-height: 54px;
+  --workspace-colophon-padding: 12px 26px;
+  --source-editor-padding: 24px clamp(18px, 3.4vw, 48px);
+  --editor-line-height: 1.95;
+  --editor-content-padding: 32px clamp(30px, 5vw, 78px) 72px;
+}
+
+:root[data-display-scale="large"] {
+  --sidebar-width: 280px;
+  --assistant-width: 396px;
+  --assistant-collapsed-width: 56px;
+  --text-7: 10px;
+  --text-8: 10px;
+  --text-9: 11px;
+  --text-10: 12px;
+  --text-11: 13px;
+  --text-12: 14px;
+  --text-13: 15px;
+  --text-14: 16px;
+  --text-15: 17px;
+  --text-16: 18px;
+  --text-17: 19px;
+  --text-18: 20px;
+  --text-20: 23px;
+  --text-21: 24px;
+  --text-22: 26px;
+  --text-25: 29px;
+  --control-height: 44px;
+  --icon-button-size: 40px;
+  --sidebar-brand-height: 62px;
+  --nav-item-height: 42px;
+  --document-column-width: clamp(216px, 22vw, 268px);
+  --document-row-padding: 14px 15px;
+  --document-row-min-height: 60px;
+  --workspace-colophon-padding: 14px 30px;
+  --source-editor-padding: 28px clamp(20px, 3.8vw, 56px);
+  --editor-line-height: 2;
+  --editor-content-padding: 36px clamp(34px, 5vw, 86px) 80px;
+}

@@ -1,0 +1,33 @@
+id: light/L001
+title: 都市重生单章·一张调解书
+layer: light
+dimension_focus: [prose]
+setup:
+  - path: worldview/return-rule.md
+    type: worldview
+    fixture: fixtures/worldview-return-rule.md
+  - path: characters/cheng-ye.md
+    type: character
+    fixture: fixtures/char-cheng-ye.md
+  - path: characters/su-wan.md
+    type: character
+    fixture: fixtures/char-su-wan.md
+  - path: outline/vol-1.md
+    type: volume
+    fixture: fixtures/dushi-volume-1.md
+  - path: text/ch-001.md
+    type: chapter-text
+    fixture: fixtures/dushi-ch-001.md
+  - path: outline/ch-002.md
+    type: chapter-card
+    fixture: fixtures/dushi-ch-002-card.md
+script:
+  - text: >-
+      请基于 outline/ch-002.md 的章卡，让 writer 完成第 2 章正文，保存到 text/ch-002.md。
+      第 1 章正文在 text/ch-001.md，注意衔接与人物口吻一致。不要向我提问，一切创作决策（细节、对白、场景取舍）自行判断并执行；写完后把该章卡 status 改为 confirmed。
+    expect:
+      path: text/ch-002.md
+constraints:
+  min_words: 1800
+rubric_weights:
+  prose: 1.0

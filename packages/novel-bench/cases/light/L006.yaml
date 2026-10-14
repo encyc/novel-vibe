@@ -1,0 +1,17 @@
+id: light/L006
+title: 都市失眠当铺·设定集起步
+layer: light
+dimension_focus: [design]
+setup: []
+script:
+  - text: >-
+      立项一部都市异闻网文：《失眠当铺》。核心设定：当铺只收"睡眠"——客人可以当掉自己的失眠、噩梦，也可以当掉别人的睡眠；当出去的东西，三个月内必须赎回，否则归"掌柜"。
+      请分两步：第一步让 worldbuilder 建立世界观文档（当铺规则、代价、边界），存到 worldview/；第二步让 character designer 写主角（新来的失忆店员）与常客（每夜来当掉自己睡眠的女医生）两张人物卡，存到 characters/。
+      不要向我提问，设定细节自行决断。
+    expect:
+      doc_type: character
+      min_count: 2
+constraints:
+  required_doc_types: [worldview, character]
+rubric_weights:
+  design: 1.0

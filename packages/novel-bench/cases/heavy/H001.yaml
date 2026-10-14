@@ -1,0 +1,62 @@
+id: heavy/H001
+title: 玄幻灵厨·第一卷连续六章（长程）
+layer: heavy
+dimension_focus: [prose, design, continuity]
+setup:
+  - path: foreshadowing/fs-001.md
+    type: foreshadow
+    fixture: fixtures/fs-001.md
+  - path: foreshadowing/fs-002.md
+    type: foreshadow
+    fixture: fixtures/fs-002.md
+  - path: foreshadowing/fs-003.md
+    type: foreshadow
+    fixture: fixtures/fs-003.md
+script:
+  - text: >-
+      立项一部玄幻美食流网文：《馋仙食谱》。金手指：主角陆小馋获得残卷《馋仙食谱》，尝一味得一分灵感，代价是味觉逐级钝化。
+      项目里 foreshadowing/ 目录有三条已登记的伏笔清单，全部要用上。第一步：请建立世界观文档（食谱来历、代价体系、灵厨界格局）与三名主要人物（陆小馋、白掌柜、对手厨）文档，存到 worldview/ 与 characters/。不要向我提问，设定细节自行决断。
+    expect:
+      doc_type: character
+      min_count: 3
+  - text: >-
+      第二步：请让 outliner 规划第一卷（6 章）：先写卷文档存 outline/，再为 6 章各写一张章卡。
+      伏笔埋收安排：fs-001（灶神残碑）第 1 章埋、第 5 章揭；fs-002（白掌柜的旧账）第 2 章埋、第 6 章收；fs-003（母亲的味觉笔记）第 3 章埋、第 6 章收。每张章卡正文写清目标、冲突、新信息、章末拉力。不要向我提问。
+    expect:
+      doc_type: chapter-card
+      min_count: 6
+  - text: 请让 writer 完成第 1 章正文，存到 text/ch-001.md。不要向我提问，创作细节自行决断。
+    expect:
+      doc_type: chapter-text
+      min_count: 1
+  - text: 请让 writer 完成第 2 章正文，存到 text/ch-002.md，衔接前章。不要向我提问。
+    expect:
+      doc_type: chapter-text
+      min_count: 2
+  - text: 请让 writer 完成第 3 章正文，存到 text/ch-003.md，衔接前章。不要向我提问。
+    expect:
+      doc_type: chapter-text
+      min_count: 3
+  - text: 请让 writer 完成第 4 章正文，存到 text/ch-004.md，衔接前章。不要向我提问。
+    expect:
+      doc_type: chapter-text
+      min_count: 4
+  - text: 请让 writer 完成第 5 章正文，存到 text/ch-005.md，本章要揭开 fs-001 残碑之秘。不要向我提问。
+    expect:
+      doc_type: chapter-text
+      min_count: 5
+  - text: >-
+      请让 writer 完成第 6 章正文（卷末），存到 text/ch-006.md；收束 fs-002 与 fs-003，让卷末有强章末拉力。
+      最后请让 script_supervisor 更新前情摘要 summary/story-so-far.md，并把三条伏笔文档的 status 与 actual_resolve 更新到实际状态。
+    expect:
+      doc_type: chapter-text
+      min_count: 6
+constraints:
+  chapter_nums: [1, 2, 3, 4, 5, 6]
+  required_doc_types: [worldview, character, chapter-card, chapter-text]
+  foreshadow_ids: [fs-001, fs-002, fs-003]
+  min_words: 1500
+rubric_weights:
+  prose: 0.4
+  design: 0.3
+  continuity: 0.3

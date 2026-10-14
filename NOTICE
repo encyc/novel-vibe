@@ -1,0 +1,63 @@
+Novel Vibe
+Copyright 2026 Justin Gao
+
+This product is licensed under the Apache License, Version 2.0 (see the
+LICENSE file in the repository root).
+
+Redistributions of this product, or of any derivative work based on it, must
+retain this NOTICE file and the copyright notice above, as required by
+Section 4(d) of the Apache License, Version 2.0.
+
+Scope of this NOTICE
+--------------------
+
+This NOTICE covers the Novel Vibe project itself: the code under
+`packages/novel-*` and the project documentation authored in this repository.
+
+It does not cover separately managed third-party projects that this repository
+depends on, references, or documents:
+
+- InsForge is a separate, independently maintained project with its own
+  repository and its own license file (`Insforge/LICENSE`). It is a third-party
+  dependency of Novel Vibe, not a part of Novel Vibe. Its own license terms
+  apply to it, and it is not covered by Novel Vibe's copyright or by this
+  NOTICE.
+- Other npm, Rust, Python, and container dependencies retain the licenses
+  declared by their respective upstream projects.
+
+Third-party license texts and required attributions belong in a dedicated
+third-party notices or SBOM artifact, not in this file.
+
+Trademarks and brand identifiers
+--------------------------------
+
+The Apache License, Version 2.0 grants copyright and patent rights in the
+code. It does not grant any right to use names, logos or brand identifiers.
+Section 6 of that license states that it does not grant permission to use the
+trade names, trademarks, service marks, or product names of the licensor,
+except for reasonable and customary use in describing the origin of the work
+and reproducing the content of this NOTICE file.
+
+The following brand identifiers belong to the Novel Vibe project and its
+maintainer (see the copyright notice at the top of this file), and are not
+licensed to you under the Apache License:
+
+- the product names "Novel Vibe" and "灵器 AI" (and the short form "灵器");
+- the domains "lingqiai.art" and its subdomains, including "app.lingqiai.art";
+- the project's logos, icons and other visual brand assets.
+
+This NOTICE does not assert that any of these identifiers is registered as a
+trademark in any jurisdiction. Where a mark is registered, the registration is
+held by the project maintainer.
+
+If you fork, modify, redistribute or self-host this software, use a different
+name and different logos/icons for your version, and do not state or imply
+that your version is official, endorsed by, sponsored by, or produced by the
+Novel Vibe project or its maintainer. Running your own instance does not grant
+the right to present it under these marks.
+
+Using a name in a plain, factual way -- for example "a fork of Novel Vibe" --
+is fine, as long as it is accurate and does not suggest endorsement.
+
+Nothing in this section limits the rights granted to you by the Apache
+License, Version 2.0 in the code itself.

@@ -1,0 +1,126 @@
+/* User-level settings page — mirrors membership page spacing and card language. */
+
+.settings-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-8, 40px) var(--space-5, 20px) 96px;
+}
+
+.settings-header h1 {
+  font-size: 1.5rem;
+  margin: 0 0 var(--space-2, 8px);
+}
+
+.settings-header p {
+  margin: 0 0 var(--space-6, 24px);
+  color: var(--ink-secondary, #5a5a52);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.settings-section h2 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-4, 16px);
+}
+
+.byok-member-gate {
+  border: 1px solid var(--paper-line, #e3ded2);
+  border-radius: 10px;
+  padding: var(--space-5, 20px);
+  background: var(--paper, #faf7ef);
+}
+
+.byok-member-gate p {
+  margin: 0 0 var(--space-3, 12px);
+}
+
+.byok-upgrade-link {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--ink, #2f2f2a);
+  color: var(--paper, #faf7ef);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.byok-unavailable {
+  color: var(--ink-secondary, #5a5a52);
+  font-size: 0.9rem;
+}
+
+.byok-provider-select {
+  display: block;
+  margin-bottom: var(--space-4, 16px);
+}
+
+.byok-provider-select span {
+  display: block;
+  margin-bottom: var(--space-2, 8px);
+  font-size: 0.85rem;
+  color: var(--ink-secondary, #5a5a52);
+}
+
+.byok-provider-select select {
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 10px;
+  border: 1px solid var(--paper-line, #e3ded2);
+  border-radius: 8px;
+  background: var(--surface, #fffdf7);
+  font-size: 0.9rem;
+}
+
+.byok-card {
+  border: 1px solid var(--paper-line, #e3ded2);
+  border-radius: 10px;
+  padding: var(--space-4, 16px);
+  background: var(--paper, #faf7ef);
+}
+
+.byok-card-title {
+  margin: 0 0 var(--space-3, 12px);
+  font-size: 0.95rem;
+}
+
+.byok-card-saved p,
+.byok-card-form label span {
+  margin: 0 0 var(--space-2, 8px);
+  font-size: 0.85rem;
+  color: var(--ink-secondary, #5a5a52);
+}
+
+.byok-card-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--paper-line, #e3ded2);
+  border-radius: 8px;
+  background: var(--surface, #fffdf7);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.byok-card-actions {
+  display: flex;
+  gap: var(--space-2, 8px);
+  margin-top: var(--space-3, 12px);
+}
+
+.byok-card-actions button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--paper-line, #e3ded2);
+  background: var(--surface, #fffdf7);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.byok-card-actions button.byok-danger {
+  color: #a33a2a;
+}
+
+.byok-card-error {
+  margin: var(--space-2, 8px) 0 0;
+  color: #a33a2a;
+  font-size: 0.8rem;
+}

@@ -1,0 +1,49 @@
+{
+  "name": "novel-vibe",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "bash scripts/start.sh",
+    "stop": "bash scripts/stop.sh",
+    "agent": "npx tsx packages/novel-agents/server.ts",
+    "web": "npm --workspace @novel-vibe/web run server",
+    "mcp": "npm --workspace @novel-vibe/mcp run server",
+    "webui:new": "npm --workspace @novel-vibe/webui run dev",
+    "desktop:dev": "npm --workspace @novel-vibe/desktop run dev",
+    "desktop:make": "npm --workspace @novel-vibe/desktop run make",
+    "check": "npm run check:i18n && npm run check:agents && npm run check:web && npm run check:webui && npm run check:mcp && npm run check:desktop && npm run check:seo && npm run check:bench",
+    "check:i18n": "node --test scripts/check-webui-i18n.test.mjs && node scripts/check-webui-i18n.mjs",
+    "check:agents": "npm --workspace @novel-vibe/agents run check",
+    "check:web": "npm --workspace @novel-vibe/web run check",
+    "check:webui": "npm --workspace @novel-vibe/webui run check",
+    "check:mcp": "npm --workspace @novel-vibe/mcp run check",
+    "check:desktop": "npm --workspace @novel-vibe/desktop run check",
+    "check:seo": "bash scripts/check-seo.sh",
+    "check:bench": "npm --workspace @novel-vibe/bench run check",
+    "check:boundary": "node scripts/check-architecture-boundary.mjs",
+    "check:hygiene": "node scripts/check-public-repo-hygiene.mjs",
+    "export:public": "node scripts/export-public-tree.mjs",
+    "bench": "npm --workspace @novel-vibe/bench run bench --",
+    "test:entropy": "bash scripts/tests/entropy-report.test.sh",
+    "test:boundary": "node --test scripts/check-architecture-boundary.test.mjs",
+    "test:hygiene": "node --test scripts/check-public-repo-hygiene.test.mjs",
+    "test:export": "node --test scripts/export-public-tree.test.mjs",
+    "test": "npm --workspace @novel-vibe/agents run test",
+    "test:coverage": "npm --workspace @novel-vibe/agents run test:coverage",
+    "test:ci": "npm --workspace @novel-vibe/agents run test:ci",
+    "smoke:web-login": "bash scripts/smoke-web-login.sh",
+    "test:e2e": "bash scripts/e2e-test.sh",
+    "test:e2e:mcp": "npx tsx scripts/e2e-mcp-test.ts",
+    "test:e2e:full": "bash scripts/e2e-test.sh --full"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "jsdom": "^29.1.1",
+    "knip": "^6.32.2"
+  }
+}

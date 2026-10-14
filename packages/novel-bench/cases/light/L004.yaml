@@ -1,0 +1,26 @@
+id: light/L004
+title: 都市重生·黄金三章章纲
+layer: light
+dimension_focus: [design]
+setup:
+  - path: worldview/return-rule.md
+    type: worldview
+    fixture: fixtures/worldview-return-rule.md
+  - path: characters/cheng-ye.md
+    type: character
+    fixture: fixtures/char-cheng-ye.md
+  - path: characters/su-wan.md
+    type: character
+    fixture: fixtures/char-su-wan.md
+script:
+  - text: >-
+      请让 outliner 基于现有世界观与人物，为第 1、2、3 章各写一张章卡，保存到 outline/ 目录（命名如 ch-001.md、ch-002.md、ch-003.md）。
+      每张章卡正文必须写清四件事：目标、冲突、新信息、章末拉力（收在哪种变化上）。不要向我提问，剧情设计自行决断。
+    expect:
+      doc_type: chapter-card
+      min_count: 3
+constraints:
+  chapter_nums: [1, 2, 3]
+  required_doc_types: [chapter-card]
+rubric_weights:
+  design: 1.0

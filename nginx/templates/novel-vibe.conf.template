@@ -1,0 +1,275 @@
+# ── HTTP → HTTPS ──────────────────────────────────────────────────────
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ${MAIN_DOMAIN} ${WWW_DOMAIN} ${APP_DOMAIN};
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# ── Main HTTPS server ─────────────────────────────────────────────────
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name ${MAIN_DOMAIN};
+
+    ssl_certificate ${MAIN_SSL_CERT};
+    ssl_certificate_key ${MAIN_SSL_KEY};
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 1d;
+    ssl_session_tickets off;
+
+    resolver 127.0.0.11 valid=10s ipv6=off;
+    root /usr/share/nginx/html/landing;
+    index index.html;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    location = / {
+        try_files /index.html =404;
+    }
+
+    location = /download {
+        try_files /download.html =404;
+    }
+
+    location /site-assets/ {
+        try_files $uri =404;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /assets/ {
+        alias /usr/share/nginx/html/webui/assets/;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /brand/ {
+        alias /usr/share/nginx/html/webui/brand/;
+        expires 1d;
+    }
+
+    location /api/ {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_read_timeout 600s;
+    }
+
+    location /health {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
+    location = /robots.txt {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location = /sitemap.xml {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location ~ "^/[A-Za-z0-9-]{8,128}\.txt$" {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location = /community {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location = /community/write {
+        root /usr/share/nginx/html/webui;
+        add_header X-Robots-Tag "noindex, nofollow" always;
+        try_files /index.html =404;
+    }
+
+    location = /community/my-feedback {
+        root /usr/share/nginx/html/webui;
+        add_header X-Robots-Tag "noindex, nofollow" always;
+        try_files /index.html =404;
+    }
+
+    location ^~ /community/edit/ {
+        root /usr/share/nginx/html/webui;
+        add_header X-Robots-Tag "noindex, nofollow" always;
+        try_files /index.html =404;
+    }
+
+    location ^~ /community/author/ {
+        root /usr/share/nginx/html/webui;
+        add_header X-Robots-Tag "noindex, nofollow" always;
+        try_files /index.html =404;
+    }
+
+    location ~ ^/community/[^/]+$ {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        try_files $uri =404;
+    }
+}
+
+# ── App HTTPS server ──────────────────────────────────────────────────
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name ${APP_DOMAIN};
+
+    ssl_certificate ${APP_SSL_CERT};
+    ssl_certificate_key ${APP_SSL_KEY};
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 1d;
+    ssl_session_tickets off;
+
+    resolver 127.0.0.11 valid=10s ipv6=off;
+    root /usr/share/nginx/html/webui;
+    index index.html;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    location = /community {
+        return 301 https://${MAIN_DOMAIN}$request_uri;
+    }
+
+    location ^~ /community/ {
+        return 301 https://${MAIN_DOMAIN}$request_uri;
+    }
+
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /api/ {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_read_timeout 600s;
+    }
+
+    location /mcp {
+        proxy_pass http://novel-mcp:7150;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_read_timeout 600s;
+    }
+
+    location /health {
+        proxy_pass http://novel-web:9120;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
+    location ~ ^/desktop/updates/stable/.+/(RELEASES|RELEASES\.json|latest\.json)$ {
+        root /usr/share/nginx/html;
+        add_header Cache-Control "no-store" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        try_files $uri =404;
+    }
+
+    location /desktop/downloads/preview/ {
+        root /usr/share/nginx/html;
+        autoindex off;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Cache-Control "public, max-age=300";
+        try_files $uri =404;
+    }
+
+    location /desktop/downloads/stable/ {
+        root /usr/share/nginx/html;
+        autoindex off;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Cache-Control "public, max-age=300";
+        try_files $uri =404;
+    }
+
+    location /desktop/updates/stable/ {
+        root /usr/share/nginx/html;
+        autoindex off;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Cache-Control "public, max-age=300";
+        try_files $uri =404;
+    }
+
+    location = /desktop/icon.ico {
+        root /usr/share/nginx/html;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Cache-Control "public, max-age=86400";
+        try_files $uri =404;
+    }
+
+    location /desktop/ {
+        return 404;
+    }
+
+    location / {
+        add_header X-Robots-Tag "noindex, nofollow" always;
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+# ── WWW HTTPS redirect ────────────────────────────────────────────────
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name ${WWW_DOMAIN};
+
+    ssl_certificate ${MAIN_SSL_CERT};
+    ssl_certificate_key ${MAIN_SSL_KEY};
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    return 301 https://${MAIN_DOMAIN}$request_uri;
+}

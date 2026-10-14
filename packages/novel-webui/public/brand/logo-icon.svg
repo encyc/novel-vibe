@@ -1,0 +1,18 @@
+<svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 灵器 LingQi — Pen Nib Icon v4 -->
+
+  <!-- Pen section (grip) -->
+  <rect x="86" y="12" width="28" height="36" rx="5" fill="#1A2F28"/>
+
+  <!-- Left tine — deep sage -->
+  <path d="M86,48 C62,50 36,66 28,96 C22,128 36,186 58,226 C78,250 94,258 100,260 L100,48Z" fill="#2D4A3E"/>
+
+  <!-- Right tine — sage -->
+  <path d="M114,48 C138,50 164,66 172,96 C178,128 164,186 142,226 C122,250 106,258 100,260 L100,48Z" fill="#598E7F"/>
+
+  <!-- Breather hole — light sage -->
+  <circle cx="100" cy="100" r="8" fill="#A8C5B8"/>
+
+  <!-- Central slit -->
+  <line x1="100" y1="108" x2="100" y2="260" stroke="#A8C5B8" stroke-width="1.5" opacity="0.7"/>
+</svg>

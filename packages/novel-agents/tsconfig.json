@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["*.ts", "auth/**/*.ts", "interactions/**/*.ts", "lib/**/*.ts", "server/**/*.ts", "scheduler/**/*.ts", "session/**/*.ts", "schemas/**/*.ts", "tools/**/*.ts"],
+  "exclude": ["memori.ts", "**/*.test.ts"]
+}

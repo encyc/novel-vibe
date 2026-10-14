@@ -1,0 +1,33 @@
+id: light/L003
+title: 悬疑信箱单章·第二个信箱
+layer: light
+dimension_focus: [prose]
+setup:
+  - path: worldview/mailbox-rule.md
+    type: worldview
+    fixture: fixtures/worldview-mailbox-rule.md
+  - path: characters/ji-chen.md
+    type: character
+    fixture: fixtures/char-ji-chen.md
+  - path: characters/lao-zhou.md
+    type: character
+    fixture: fixtures/char-lao-zhou.md
+  - path: outline/vol-1.md
+    type: volume
+    fixture: fixtures/xuanyi-volume-1.md
+  - path: text/ch-001.md
+    type: chapter-text
+    fixture: fixtures/xuanyi-ch-001.md
+  - path: outline/ch-002.md
+    type: chapter-card
+    fixture: fixtures/xuanyi-ch-002-card.md
+script:
+  - text: >-
+      请基于 outline/ch-002.md 的章卡完成第 2 章正文，保存到 text/ch-002.md，与 text/ch-001.md 的悬念节奏保持一致。
+      不要向我提问，创作细节自行决断；完成后把章卡 status 改为 confirmed。
+    expect:
+      path: text/ch-002.md
+constraints:
+  min_words: 1800
+rubric_weights:
+  prose: 1.0

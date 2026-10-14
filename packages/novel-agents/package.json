@@ -1,0 +1,43 @@
+{
+  "name": "@novel-vibe/agents",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch server.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run test -- --run --coverage",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --run --coverage",
+    "test:ci": "vitest --run --coverage --reporter=junit --outputFile=./test-results.xml",
+    "server": "tsx server.ts",
+    "resources": "tsx commands/agent-resources.ts",
+    "scheduler": "tsx scheduler/cli.ts",
+    "scheduler:worker": "tsx scheduler/worker.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "1.1.0",
+    "@earendil-works/pi-ai": "1.1.0",
+    "@memorilabs/memori": "^0.1.23-beta",
+    "@sinclair/typebox": "^0.34.0",
+    "@tavily/core": "^0.7.6",
+    "diff": "9.0.0",
+    "docx": "^9.7.1",
+    "dotenv": "^17.4.2",
+    "jose": "^6.2.3",
+    "nodemailer": "^9.0.5",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^8.0.1",
+    "@types/pg": "^8.21.0",
+    "@vitest/coverage-v8": "^3.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.1.0"
+  }
+}

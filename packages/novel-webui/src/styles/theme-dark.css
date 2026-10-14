@@ -1,0 +1,619 @@
+:root[data-theme="dark"] {
+  --color-canvas: hsl(155 13% 10%);
+  --color-surface: hsl(150 11% 13%);
+  --color-paper: hsl(48 10% 15%);
+  --color-paper-deep: hsl(48 9% 12%);
+  --color-ink: hsl(48 18% 83%);
+  --color-text: hsl(48 18% 83%);
+  --color-sage-900: hsl(153 27% 68%);
+  --color-sage-700: hsl(153 24% 60%);
+  --color-sage-600: hsl(153 24% 60%);
+  --color-sage-300: hsl(153 16% 36%);
+  --color-sage-100: hsl(154 18% 23%);
+  --color-sage-50: hsl(152 13% 16%);
+  --color-mist-100: hsl(150 10% 17%);
+  --color-rose-100: hsl(3 20% 20%);
+  --color-rose-300: hsl(4 28% 34%);
+  --color-border: hsl(150 8% 25%);
+  --color-muted: hsl(45 8% 62%);
+  --color-danger: hsl(4 46% 64%);
+  --color-seal: hsl(8 38% 64%);
+  --shadow-paper: 0 20px 55px hsl(160 24% 4% / .36);
+  /* Alias layer dark remap: borders become light-on-dark veils, labels
+     invert, interactive washes flip polarity. */
+  --alias-border-l2: hsl(160 12% 88% / .08);
+  --alias-border-l3: hsl(160 12% 88% / .12);
+  --alias-border-l4: hsl(160 12% 88% / .18);
+  --alias-label-secondary: hsl(45 8% 64%);
+  --alias-label-tertiary: hsl(45 6% 54%);
+  --alias-label-caption: hsl(45 5% 46%);
+  --alias-interactive-hover: hsl(155 14% 80% / .08);
+  --alias-interactive-active: hsl(155 14% 80% / .13);
+  --alias-interactive-hover-solid: hsl(150 10% 18%);
+  --alias-solid-bg: hsl(153 26% 26%);
+  --alias-solid-fg: hsl(153 24% 90%);
+  --alias-scrollbar-thumb: hsl(150 8% 30%);
+  --alias-scrollbar-thumb-hover: hsl(150 8% 40%);
+}
+
+:root[data-theme="dark"] body {
+  background-color: var(--color-canvas);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] .project-settings-card select {
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: hsl(145 7% 46%);
+}
+
+/* Dark primary solids go deep, not pastel: sage-700/900 remap to 60-68% mint,
+   and cream text on that fill measured ~2:1. Deep fills hold contrast. */
+:root[data-theme="dark"] .primary-button,
+:root[data-theme="dark"] .session-create-button {
+  color: hsl(153 24% 90%);
+  background: hsl(153 26% 26%);
+  border-color: hsl(153 20% 36%);
+}
+:root[data-theme="dark"] .primary-button:hover:not(:disabled),
+:root[data-theme="dark"] .session-create-button:hover:not(:disabled) {
+  background: hsl(153 26% 32%);
+}
+:root[data-theme="dark"] .danger-button {
+  color: hsl(4 60% 92%);
+  background: hsl(4 42% 32%);
+  border-color: hsl(4 34% 42%);
+}
+:root[data-theme="dark"] .assistant-send,
+:root[data-theme="dark"] .interaction-card > footer button {
+  color: hsl(153 24% 92%);
+  background: hsl(153 24% 34%);
+}
+:root[data-theme="dark"] .assistant-send:hover:not(:disabled),
+:root[data-theme="dark"] .interaction-card > footer button:hover:not(:disabled) {
+  background: hsl(153 24% 41%);
+}
+:root[data-theme="dark"] .send-button {
+  color: hsl(155 18% 10%);
+}
+
+:root[data-theme="dark"] .tooltip-content {
+  color: hsl(155 18% 10%);
+}
+
+:root[data-theme="dark"] .dropdown-content {
+  background: hsl(150 10% 17%);
+  border-color: var(--color-border);
+  box-shadow: 0 12px 30px hsl(160 24% 4% / .38);
+}
+
+:root[data-theme="dark"] .dropdown-item {
+  color: var(--color-ink);
+}
+
+:root[data-theme="dark"] .dropdown-item:hover,
+:root[data-theme="dark"] .dropdown-item:focus,
+:root[data-theme="dark"] .dropdown-item[data-highlighted] {
+  background: var(--color-sage-100);
+}
+
+:root[data-theme="dark"] .interface-language-options {
+  background: hsl(150 10% 11% / .78);
+  border-color: var(--color-border);
+  box-shadow: inset 0 1px 3px hsl(160 24% 4% / .28);
+}
+
+:root[data-theme="dark"] .interface-language-option:hover {
+  color: var(--color-ink);
+  background: var(--color-sage-100);
+}
+
+:root[data-theme="dark"] .interface-language-option[aria-pressed="true"] {
+  color: var(--color-sage-900);
+  background: hsl(48 10% 18%);
+  box-shadow: 0 1px 5px hsl(160 24% 4% / .32), inset 2px 0 var(--color-sage-600);
+}
+
+.theme-selector-menu { min-width: 148px; }
+.theme-selector-option { display: grid; grid-template-columns: 18px 1fr 16px; align-items: center; gap: 7px; }
+.theme-selector-trigger { color: hsl(168 16% 86%); }
+
+:root[data-theme="dark"] .workbench-shell,
+:root[data-theme="dark"] .workspace-main,
+:root[data-theme="dark"] .document-workspace,
+:root[data-theme="dark"] .overview-page {
+  background-color: var(--color-canvas);
+}
+
+:root[data-theme="dark"] .session-rail {
+  color: var(--color-ink);
+  background-color: hsl(157 16% 8%);
+  background-image: none;
+  border-right-color: var(--color-border);
+  box-shadow: 8px 0 28px hsl(160 24% 4% / .18);
+}
+
+:root[data-theme="dark"] .rail-project-chip,
+:root[data-theme="dark"] .rail-credit {
+  color: var(--color-ink);
+  background: hsl(150 11% 13% / .78);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .rail-community-link { color: var(--color-muted); }
+:root[data-theme="dark"] .rail-community-link:hover { background: hsl(154 18% 19%); }
+
+:root[data-theme="dark"] .assistant-rail,
+:root[data-theme="dark"] .assistant-panel,
+:root[data-theme="dark"] .assistant-composer,
+:root[data-theme="dark"] .assistant-message > p,
+:root[data-theme="dark"] .chat-trace-detail pre,
+:root[data-theme="dark"] .markdown-editor,
+:root[data-theme="dark"] .markdown-preview,
+:root[data-theme="dark"] .document-toolbar,
+:root[data-theme="dark"] .workspace-topbar,
+:root[data-theme="dark"] .overview-brief,
+:root[data-theme="dark"] .recent-list button {
+  background-color: var(--color-surface);
+}
+
+:root[data-theme="dark"] .assistant-message.user > p,
+:root[data-theme="dark"] .session-manager-row[data-current="true"],
+:root[data-theme="dark"] .status-badge,
+:root[data-theme="dark"] .assistant-context-chip {
+  background-color: var(--color-sage-100);
+  border-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .read-only-banner,
+:root[data-theme="dark"] .assistant-memory-warning {
+  color: hsl(39 48% 72%);
+  background: hsl(39 20% 17%);
+  border-color: hsl(39 25% 29%);
+}
+
+:root[data-theme="dark"] .session-dialog-overlay {
+  background: hsl(160 24% 4% / .68);
+}
+
+:root[data-theme="dark"] .session-dialog-content,
+:root[data-theme="dark"] .session-confirm-panel {
+  box-shadow: 0 24px 70px hsl(160 24% 4% / .5);
+}
+
+:root[data-theme="dark"] .cm-editor,
+:root[data-theme="dark"] .cm-scroller,
+:root[data-theme="dark"] .cm-gutters {
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+}
+
+:root[data-theme="dark"] .cm-gutters {
+  color: hsl(145 7% 46%);
+  border-right-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .cm-activeLine,
+:root[data-theme="dark"] .cm-activeLineGutter {
+  background-color: hsl(154 18% 20%);
+}
+
+:root[data-theme="dark"] .cm-selectionBackground,
+:root[data-theme="dark"] .cm-content ::selection {
+  background-color: hsl(153 24% 60% / .24) !important;
+}
+
+:root[data-theme="dark"] .login-screen {
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(circle at 12% 9%, hsl(151 22% 18% / .52), transparent 27%),
+    radial-gradient(circle at 88% 8%, hsl(39 20% 14% / .55), transparent 30%),
+    linear-gradient(125deg, hsl(150 14% 12% / .35), transparent 52%);
+}
+
+:root[data-theme="dark"] .login-edition,
+:root[data-theme="dark"] .login-panel,
+:root[data-theme="dark"] .project-entry-panel {
+  background-color: var(--color-paper);
+  border-color: var(--color-border);
+  box-shadow: 0 32px 90px hsl(160 24% 4% / .42);
+}
+
+:root[data-theme="dark"] .login-panel {
+  background: hsl(48 9% 16% / .82);
+}
+
+:root[data-theme="dark"] .login-foreword {
+  --bloom-petal-deep: hsl(158 28% 52% / .48);
+  --bloom-petal-mid: hsl(145 24% 66% / .34);
+  --bloom-petal-tip: hsl(75 24% 78% / .12);
+  --bloom-heart-light: hsl(51 48% 81% / .86);
+  --bloom-heart-mid: hsl(71 31% 57% / .82);
+  --bloom-heart-deep: hsl(153 31% 28% / .9);
+}
+
+:root[data-theme="dark"] .login-bloom {
+  opacity: .72;
+  filter: drop-shadow(0 26px 38px hsl(160 35% 4% / .35));
+}
+
+:root[data-theme="dark"] .login-foreword-copy p {
+  color: hsl(84 14% 84%);
+}
+
+:root[data-theme="dark"] .login-foreword-note {
+  color: hsl(78 10% 72%);
+  border-color: hsl(90 8% 43%);
+}
+
+:root[data-theme="dark"] .login-panel footer {
+  color: var(--color-muted);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .login-form input {
+  border-bottom-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .login-form .segmented {
+  background: var(--color-mist-100);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .login-form .segmented button { color: var(--color-muted); }
+:root[data-theme="dark"] .login-form .segmented button.active {
+  color: var(--color-sage-900);
+  background: var(--color-surface);
+}
+
+:root[data-theme="dark"] .project-center-page {
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(circle at 13% 5%, hsl(151 22% 18% / .4), transparent 27%),
+    radial-gradient(circle at 90% 2%, hsl(39 20% 14% / .42), transparent 26%);
+}
+
+:root[data-theme="dark"] .project-center-header,
+:root[data-theme="dark"] .project-grid,
+:root[data-theme="dark"] .project-card,
+:root[data-theme="dark"] .project-create-panel {
+  background-color: var(--color-paper);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .project-card,
+:root[data-theme="dark"] .project-grid > [role="listitem"] .project-card {
+  border-bottom-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .project-card-mark {
+  background: linear-gradient(145deg, var(--color-sage-100), hsl(48 9% 17%));
+}
+
+:root[data-theme="dark"] .project-card-open {
+  border-bottom-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .project-create-overlay {
+  background: hsl(160 24% 4% / .7);
+}
+
+:root[data-theme="dark"] .project-create-panel input,
+:root[data-theme="dark"] .project-create-panel textarea {
+  background: hsl(150 11% 13% / .72);
+}
+
+:root[data-theme="dark"] .profile-page,
+:root[data-theme="dark"] .profile-shell,
+:root[data-theme="dark"] .profile-card,
+:root[data-theme="dark"] .credit-card {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+/* Profile dark — the flat dsh settings surface rides on alias tokens; only
+   the heatmap base and a few layered fills need explicit dark values. */
+:root[data-theme="dark"] .profile-section,
+:root[data-theme="dark"] .profile-ledger-main {
+  background-color: var(--color-surface);
+  border-color: var(--alias-border-l3);
+}
+
+:root[data-theme="dark"] .credit-summary-grid > div,
+:root[data-theme="dark"] .credit-package,
+:root[data-theme="dark"] .membership-card,
+:root[data-theme="dark"] .referral-campaign-folio,
+:root[data-theme="dark"] .referral-counts > div,
+:root[data-theme="dark"] .api-token-secret {
+  background-color: hsl(150 10% 11%);
+  border-color: var(--alias-border-l3);
+}
+
+:root[data-theme="dark"] .credit-heatmap-cell,
+:root[data-theme="dark"] .credit-heatmap-legend i { background: hsl(150 10% 18%); }
+:root[data-theme="dark"] .credit-heatmap-cell[data-level="1"],
+:root[data-theme="dark"] .credit-heatmap-legend i[data-level="1"] { background: hsl(153 22% 28%); }
+:root[data-theme="dark"] .credit-heatmap-cell[data-level="2"],
+:root[data-theme="dark"] .credit-heatmap-legend i[data-level="2"] { background: hsl(153 26% 40%); }
+:root[data-theme="dark"] .credit-heatmap-cell[data-level="3"],
+:root[data-theme="dark"] .credit-heatmap-legend i[data-level="3"] { background: hsl(153 30% 52%); }
+:root[data-theme="dark"] .credit-heatmap-cell[data-level="4"],
+:root[data-theme="dark"] .credit-heatmap-legend i[data-level="4"] { background: hsl(153 34% 66%); }
+
+/* Skills dark — flat alias surface; inputs flip to a darker base fill. */
+:root[data-theme="dark"] .skill-form input,
+:root[data-theme="dark"] .skill-form textarea {
+  background-color: hsl(150 11% 10%);
+  border-color: var(--alias-border-l3);
+}
+
+:root[data-theme="dark"] .skill-role-grid label {
+  background-color: hsl(150 10% 11%);
+}
+
+:root[data-theme="dark"] .skill-role-grid label:has(input:checked) {
+  color: var(--color-ink);
+  background: var(--color-sage-100);
+  border-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .skills-page .primary-button {
+  color: hsl(155 18% 10%);
+  background: var(--color-sage-600);
+}
+
+:root[data-theme="dark"] .skill-versions,
+:root[data-theme="dark"] .skill-diff > div {
+  background-color: hsl(150 10% 11%);
+  border-color: var(--alias-border-l3);
+}
+
+:root[data-theme="dark"] .skill-diff pre {
+  color: var(--color-ink);
+  background: var(--color-paper-deep);
+}
+
+/* Real application surfaces. These selectors intentionally mirror the
+   page-specific light palette declared at the end of each feature stylesheet. */
+:root[data-theme="dark"] .workbench,
+:root[data-theme="dark"] .mobile-navigation-sheet {
+  background-color: var(--color-canvas);
+  background-image: linear-gradient(90deg, hsl(153 18% 18% / .18), transparent 44%);
+}
+
+:root[data-theme="dark"] .document-change-card,
+:root[data-theme="dark"] .document-version-history,
+:root[data-theme="dark"] .document-diff-viewer { background:var(--color-paper);border-color:var(--color-border) }
+:root[data-theme="dark"] .diff-line[data-kind="insert"] { background:hsl(155 24% 17%) }
+:root[data-theme="dark"] .diff-line[data-kind="delete"] { background:hsl(8 30% 18%) }
+:root[data-theme="dark"] .diff-line[data-kind="context"] { background:var(--color-paper) }
+:root[data-theme="dark"] .inline-insert { background:hsl(156 22% 27%) }
+:root[data-theme="dark"] .inline-delete { background:hsl(8 32% 29%) }
+:root[data-theme="dark"] .sidebar-brand { border-bottom-color: var(--color-border); }
+:root[data-theme="dark"] .sidebar-edition-mark,
+:root[data-theme="dark"] .session-row-meta,
+:root[data-theme="dark"] .rail-profile span,
+:root[data-theme="dark"] .rail-list-note { color: hsl(145 7% 46%); }
+
+
+
+:root[data-theme="dark"] .rail-rename-form input {
+  background: hsl(150 12% 12%);
+  border-color: var(--color-border);
+}
+
+
+:root[data-theme="dark"] .workspace-panel-tabs { background: hsl(150 11% 13% / .9); border-bottom-color: var(--color-border); }
+:root[data-theme="dark"] .workspace-panel-tabs [role="tab"] { color: var(--color-muted); }
+
+/* Review page night surfaces */
+:root[data-theme="dark"] .review-page { background-color: var(--color-canvas); }
+:root[data-theme="dark"] .review-header { border-bottom-color: var(--color-border); }
+:root[data-theme="dark"] .review-header p { color: var(--color-muted); }
+:root[data-theme="dark"] .review-group { background: hsl(150 11% 13% / .9); border-color: var(--color-border); }
+
+:root[data-theme="dark"] .workspace-main {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(circle at 78% 4%, hsl(154 17% 22% / .28), transparent 29rem);
+  box-shadow: inset 0 0 0 1px hsl(150 8% 25% / .42);
+}
+
+:root[data-theme="dark"] .workspace-colophon {
+  background: hsl(150 11% 13% / .9);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 5px 18px hsl(160 24% 4% / .18);
+}
+
+:root[data-theme="dark"] .workspace-colophon-eyebrow,
+:root[data-theme="dark"] .workspace-colophon p { color: var(--color-muted); }
+
+:root[data-theme="dark"] .overview-page { background: var(--color-canvas); }
+:root[data-theme="dark"] .overview-brief {
+  background: var(--color-paper);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-paper);
+}
+
+:root[data-theme="dark"] .overview-brief .overview-metrics,
+:root[data-theme="dark"] .overview-brief .overview-metrics div,
+:root[data-theme="dark"] .overview-brief .section-heading,
+:root[data-theme="dark"] .overview-brief .recent-list button { border-color: var(--color-border); }
+
+:root[data-theme="dark"] .overview-brief .recent-list button:hover { background: var(--color-sage-100); }
+
+:root[data-theme="dark"] .document-workspace,
+:root[data-theme="dark"] .document-workspace-body { background: var(--color-canvas); }
+
+:root[data-theme="dark"] .workspace-document-list {
+  background: var(--color-paper-deep);
+  border-right-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .workspace-document-list button { border-bottom-color: var(--color-border); }
+:root[data-theme="dark"] .workspace-document-list button.active { background: var(--color-sage-100); }
+:root[data-theme="dark"] .workspace-document-index { color: hsl(145 7% 46%); }
+
+:root[data-theme="dark"] .source-editor {
+  background-color: var(--color-canvas);
+}
+
+:root[data-theme="dark"] .source-editor > .cm-editor,
+:root[data-theme="dark"] .source-editor > textarea,
+:root[data-theme="dark"] .source-editor > .markdown-preview {
+  color: var(--alias-label-primary);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .project-settings-page { background: var(--color-canvas); }
+/* Settings dark — alias surface; inputs get the darker base fill. */
+:root[data-theme="dark"] .project-settings-archive .project-settings-card { background-color: var(--color-surface); border-color: var(--alias-border-l3); }
+:root[data-theme="dark"] .project-settings-archive .project-settings-card input,
+:root[data-theme="dark"] .project-settings-archive .project-settings-card textarea,
+:root[data-theme="dark"] .project-settings-archive .project-settings-card select {
+  color: var(--color-ink);
+  background: hsl(150 11% 10%);
+  border-color: var(--alias-border-l3);
+}
+:root[data-theme="dark"] .workspace-skill-list input[type="checkbox"] { accent-color: var(--color-sage-600); }
+
+:root[data-theme="dark"] .ai-assistant-rail {
+  background: var(--color-surface);
+  border-left-color: var(--color-border);
+  box-shadow: -7px 0 24px hsl(160 24% 4% / .24);
+}
+
+:root[data-theme="dark"] .assistant-header {
+  background: var(--color-paper);
+  border-bottom-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .assistant-avatar {
+  background: var(--color-sage-100);
+  border-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .assistant-title strong { color: var(--color-ink); }
+:root[data-theme="dark"] .assistant-title div span,
+:root[data-theme="dark"] .assistant-message > span { color: var(--color-muted); }
+
+:root[data-theme="dark"] .assistant-context-chip {
+  color: var(--color-muted);
+  background: var(--color-paper-deep);
+  border-color: var(--color-border);
+  border-left-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .assistant-messages {
+  background-color: var(--color-canvas);
+}
+
+:root[data-theme="dark"] .assistant-message > p,
+:root[data-theme="dark"] .assistant-markdown {
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border-color: var(--color-border);
+  box-shadow: 0 4px 13px hsl(160 24% 4% / .18);
+}
+
+:root[data-theme="dark"] .assistant-message.user > p { background: var(--color-sage-100); }
+:root[data-theme="dark"] .chat-trace {
+  background: var(--color-paper-deep);
+  border-color: var(--color-border);
+  border-left-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .chat-trace-summary { background: var(--color-sage-100); }
+:root[data-theme="dark"] .assistant-composer {
+  background: var(--color-paper);
+  border-top-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .assistant-composer textarea {
+  color: var(--color-ink);
+  background: var(--color-paper-deep);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .assistant-command-menu {
+  color: var(--color-ink);
+  background: var(--color-surface-raised, hsl(150 10% 17%));
+  border-color: var(--color-border);
+  box-shadow: 0 12px 32px hsl(160 24% 4% / .34);
+}
+
+:root[data-theme="dark"] .assistant-command-menu button { border-bottom-color: var(--color-border); }
+:root[data-theme="dark"] .assistant-expand {
+  color: var(--color-sage-900);
+  background: var(--color-paper);
+  border-left-color: var(--color-sage-300);
+}
+
+:root[data-theme="dark"] .project-center {
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(circle at 82% 3%, hsl(154 17% 22% / .3), transparent 32rem),
+    linear-gradient(130deg, hsl(150 14% 12% / .28), transparent 48%);
+}
+
+:root[data-theme="dark"] .project-center-titlebar p { color: var(--color-muted); }
+:root[data-theme="dark"] .project-center-toolbar { border-color: var(--color-border); }
+:root[data-theme="dark"] .project-tabs button:hover { background: var(--color-sage-100); }
+:root[data-theme="dark"] .project-tabs button.active { color: hsl(155 18% 10%); }
+:root[data-theme="dark"] .project-tabs button strong { background: hsl(48 18% 78% / .08); }
+:root[data-theme="dark"] .project-card-link:hover { background: var(--color-sage-100); }
+:root[data-theme="dark"] .project-start-options label { background: var(--color-surface); }
+:root[data-theme="dark"] .project-start-options label:has(input:checked) { background: var(--color-sage-100); }
+:root[data-theme="dark"] .project-search {
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+/* Community dark mode overrides */
+:root[data-theme="dark"] .community-page {
+  --community-paper: var(--color-paper);
+  --community-paper-strong: var(--color-surface);
+  --community-ink: var(--color-ink);
+  --community-sage: var(--color-sage-300);
+  --community-accent: var(--color-seal);
+  --community-line: var(--color-border);
+  --community-muted: var(--color-muted);
+  --community-canvas: var(--color-canvas);
+  --community-canvas-glow: hsl(153 24% 60% / .04);
+  --community-topbar: hsl(48 10% 15% / .92);
+  --community-surface-soft: var(--color-surface);
+  --community-surface-hover: var(--color-sage-100);
+  --community-chip: var(--color-sage-100);
+  --community-chip-border: var(--color-sage-300);
+  --community-accent-soft: var(--color-rose-100);
+  --community-accent-line: var(--color-rose-300);
+  --community-input: var(--color-paper-deep);
+}
+
+:root[data-theme="dark"] .community-article-card {
+  background: var(--color-surface);
+}
+
+:root[data-theme="dark"] .community-section-tab[data-active="true"] {
+  background: var(--color-sage-700);
+  color: var(--color-paper);
+}
+
+:root[data-theme="dark"] .community-comment-input,
+:root[data-theme="dark"] .community-editor-meta select,
+:root[data-theme="dark"] .community-editor-tags {
+  background: var(--color-surface);
+}
+
+@media(prefers-contrast:more){
+  :root[data-theme="dark"]{--color-border:hsl(48 12% 62%);--color-muted:hsl(48 12% 76%)}
+}
+

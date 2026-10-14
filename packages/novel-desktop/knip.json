@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "scripts/make.mjs",
+    "scripts/check.mjs"
+  ],
+  "ignoreBinaries": [
+    "cargo",
+    "tauri"
+  ],
+  "ignore": [
+    "src-tauri/target/**"
+  ]
+}

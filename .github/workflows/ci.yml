@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    name: Type Check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm --workspace @novel-vibe/agents run typecheck
+      # The creation core must not import SaaS modules. Enforced: the domain layer is the
+      # blocking set (composition-root wiring and the lib/db.ts facade are counted and
+      # printed but never block — a composition root has to know what it injects).
+      # The domain layer reached zero on 2026-10-10, so this now guards against
+      # regression instead of reporting a known backlog.
+      - name: Architecture boundary (core -> SaaS, enforced)
+        run: |
+          npm run test:boundary
+          npm run check:boundary -- --enforce
+      # Publication safety: nothing classified public may contain production identifiers,
+      # credentials, key material or private paths. This repository is the mixed repository, so
+      # the whole-tree scope always reports the private operations files that legitimately live
+      # here; `--public-only` is the meaningful gate — it fails only when a file that would be
+      # published is dirty.
+      #
+      # `--dangling-code-only` additionally fails when a public file reads a private file. Passing
+      # a secrets scan is not the same as producing a repository that works: a public test that
+      # reads a private fixture crashes on import in the public clone. References protected by an
+      # existence check in the same file report as advisories instead, so the test coverage that
+      # only a full checkout can exercise is kept rather than deleted to satisfy the rule.
+      - name: Public repo hygiene (public subset must be clean)
+        run: |
+          npm run test:hygiene
+          npm run test:export
+          npm run check:hygiene -- --public-only --strict --dangling-code-only
+
+  test:
+    runs-on: ubuntu-latest
+    name: Tests + Coverage
+    needs: [typecheck]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run test:ci
+        working-directory: packages/novel-agents
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: packages/novel-agents/coverage/
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: packages/novel-agents/test-results.xml
+
+  desktop-check:
+    runs-on: ubuntu-latest
+    name: Desktop Check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - uses: dtolnay/rust-toolchain@1.91.0
+        with:
+          components: rustfmt, clippy
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: packages/novel-desktop/src-tauri
+      - name: Install Tauri Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev build-essential libxdo-dev libssl-dev \
+            libayatana-appindicator3-dev librsvg2-dev
+      - run: npm ci
+      - run: npm run check:desktop
+
+  desktop-package-macos:
+    runs-on: macos-14
+    name: Desktop Package (macOS)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - uses: dtolnay/rust-toolchain@1.91.0
+        with:
+          targets: x86_64-apple-darwin
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: packages/novel-desktop/src-tauri
+      - run: npm ci
+      - name: Make arm64 app bundle (smoke)
+        run: npm --workspace @novel-vibe/desktop run make
+      - name: Make x64 app bundle (smoke)
+        run: npm --workspace @novel-vibe/desktop run make -- --target x86_64-apple-darwin
+
+  desktop-package-windows:
+    runs-on: windows-latest
+    name: Desktop Package (Windows)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - uses: dtolnay/rust-toolchain@1.91.0
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: packages/novel-desktop/src-tauri
+      - run: npm ci
+      - name: Make Windows installer (smoke)
+        run: npm --workspace @novel-vibe/desktop run make

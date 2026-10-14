@@ -1,0 +1,45 @@
+/**
+ * Curated dictionary of AI-flavored clichés that Chinese web-novel readers flag as
+ * machine-generated filler. Data, not logic: extending the list requires no code change.
+ * Entries are reviewer-curated (see verifier-stack spec ADR-5); do not auto-harvest.
+ */
+export const BANNED_PHRASES: readonly string[] = [
+  "眼底闪过一丝",
+  "眼中闪过一丝",
+  "眼底深处闪过",
+  "嘴角勾起一抹",
+  "勾起一抹弧度",
+  "一抹不易察觉的",
+  "一丝不易察觉的",
+  "空气仿佛凝固",
+  "空气骤然安静",
+  "时间仿佛静止",
+  "如遭雷击",
+  "脑海中一片空白",
+  "大脑一片空白",
+  "心脏猛地一缩",
+  "瞳孔骤然收缩",
+  "不由得倒吸一口凉气",
+  "倒吸一口冷气",
+  "意味深长地看了",
+  "意味深长地笑了笑",
+  "不知过了多久",
+  "深吸一口气，压下",
+  "顿了顿，缓缓开口",
+  "顿了顿，才缓缓说道",
+  "沉声道",
+  // 2026-09-03 扩充：抽象情绪转述与"闪过/噙着"变体（源自 webnovel-skill 去 AI 味反例）
+  "五味杂陈",
+  "内心翻涌",
+  "说不清道不明",
+  "眼神复杂",
+  "神色复杂",
+  "情绪复杂",
+  "复杂的情绪",
+  "空气安静得可怕",
+  "眸中闪过",
+  "眼底掠过",
+  "眸光一闪",
+  "嘴角噙着",
+  "噙着一抹",
+];
